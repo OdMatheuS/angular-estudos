@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
   public nome: string = '';
   public senha: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,private router:Router) {}
 
   ngOnInit(): void {}
 
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
     console.log('dados form', foo);
     this.authService.autenticar(this.nome, this.senha).subscribe(
       (res) => {
+        this.router.navigate(['animais'])
         console.log(res);
       },
       (err: HttpErrorResponse) => {
