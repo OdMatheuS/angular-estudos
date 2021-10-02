@@ -1,19 +1,52 @@
 <h4 class="text-center">Resgistre-se e mostre seu pet ao mundo!</h4>
 
-<form class="form mt-4">
+<form class="form mt-4" [formGroup]="novoUsuarioForm">
   <div class="form-group margin-vertical">
-    <input class="form-control" placeholder="E-mail" type="email" />
+    <input
+      formControlName="email"
+      class="form-control"
+      placeholder="E-mail"
+    />
+    <app-mensagem
+      *ngIf="
+        novoUsuarioForm.get('email')?.errors?.required && novoUsuarioForm.get('email')?.touched"
+        mensagem="E-mail obrigatório"
+    ></app-mensagem>
+
+    <app-mensagem
+      *ngIf="novoUsuarioForm.get('email')?.errors?.email && novoUsuarioForm.get('email')?.touched"
+      mensagem="E-mail no formato incorreto"
+    ></app-mensagem>
+
   </div>
   <div class="form-group margin-vertical">
-    <input class="form-control" placeholder="Nome Completo" />
+    <input formControlName="fullName" class="form-control" placeholder="Nome Completo" required />
+    <app-mensagem
+      *ngIf="
+        novoUsuarioForm.get('fullName')?.errors?.required && novoUsuarioForm.get('email')?.touched
+      "
+      mensagem="Nome Completo obrigatório"
+    ></app-mensagem>
   </div>
   <div class="form-group margin-vertical">
-    <input class="form-control" placeholder="Usuário" />
+    <input formControlName="userName" class="form-control" placeholder="Usuário" required />
   </div>
   <div class="form-group margin-vertical">
-    <input class="form-control" placeholder="Senha" type="password" />
+    <input
+      formControlName="password"
+      class="form-control"
+      placeholder="Senha"
+      type="password"
+      required
+    />
   </div>
-  <button class="btn btn-primary btn-block">Cadastro</button>
+  <button
+    (click)="postNovoUsuario()"
+    [disabled]="novoUsuarioForm.invalid"
+    class="btn btn-primary btn-block"
+  >
+    Cadastro
+  </button>
 </form>
 
 <div class="margin-vertical">
