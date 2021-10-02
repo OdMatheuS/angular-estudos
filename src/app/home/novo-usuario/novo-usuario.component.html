@@ -46,8 +46,11 @@
       class="form-control"
       placeholder="Senha"
       type="password"
-      required
     />
+    <app-mensagem
+      *ngIf=" novoUsuarioForm.errors?.senhaIgualUsuario"
+      mensagem="senha e usuário não podem ser iguais"
+    ></app-mensagem>
   </div>
   <button
     (click)="postNovoUsuario()"

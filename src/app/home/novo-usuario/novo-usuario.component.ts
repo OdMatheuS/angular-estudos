@@ -5,6 +5,7 @@ import { NovoUsuario } from './novo-usuario';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { lowerCaseValidator } from './lowerCase.validator';
 import { UsuarioExisteService } from './usuario-existe.service';
+import { usuarioSenhaIguaisValidator } from './usuario-senha-iguais.validator';
 
 @Component({
   selector: 'app-novo-usuario',
@@ -21,12 +22,17 @@ export class NovoUsuarioComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.novoUsuarioForm = this.fb.group({
-      password: [''],
-      fullName: ['', Validators.required, Validators.minLength(5)],
-      userName: ['', [lowerCaseValidator], [this.usuarioExistenteService.usuarioJaExiste()]],
-      email: ['', Validators.required, Validators.email],
-    });
+    this.novoUsuarioForm = this.fb.group(
+      {
+        password: [''],
+        fullName: ['', Validators.required, Validators.minLength(5)],
+        userName: ['', [lowerCaseValidator], [this.usuarioExistenteService.usuarioJaExiste()]],
+        email: ['', Validators.required, Validators.email],
+      },
+      {
+        validators: [usuarioSenhaIguaisValidator],
+      }
+    );
   }
 
   postNovoUsuario(): void {
