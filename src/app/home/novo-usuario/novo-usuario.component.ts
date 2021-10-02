@@ -4,6 +4,7 @@ import { NovoUsuarioService } from './novo-usuario.service';
 import { NovoUsuario } from './novo-usuario';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { lowerCaseValidator } from './lowerCase.validator';
+import { UsuarioExisteService } from './usuario-existe.service';
 
 @Component({
   selector: 'app-novo-usuario',
@@ -13,13 +14,17 @@ import { lowerCaseValidator } from './lowerCase.validator';
 export class NovoUsuarioComponent implements OnInit {
   novoUsuarioForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private cadastro: NovoUsuarioService) {}
+  constructor(
+    private fb: FormBuilder,
+    private cadastro: NovoUsuarioService,
+    private usuarioExistenteService: UsuarioExisteService
+  ) {}
 
   ngOnInit(): void {
     this.novoUsuarioForm = this.fb.group({
       password: [''],
       fullName: ['', Validators.required, Validators.minLength(5)],
-      userName: ['', [lowerCaseValidator]],
+      userName: ['', [lowerCaseValidator], [this.usuarioExistenteService.usuarioJaExiste()]],
       email: ['', Validators.required, Validators.email],
     });
   }
