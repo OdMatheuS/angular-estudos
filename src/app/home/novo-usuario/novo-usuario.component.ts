@@ -6,6 +6,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { lowerCaseValidator } from './lowerCase.validator';
 import { UsuarioExisteService } from './usuario-existe.service';
 import { usuarioSenhaIguaisValidator } from './usuario-senha-iguais.validator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-novo-usuario',
@@ -18,16 +19,17 @@ export class NovoUsuarioComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private cadastro: NovoUsuarioService,
-    private usuarioExistenteService: UsuarioExisteService
+    private usuarioExistenteService: UsuarioExisteService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.novoUsuarioForm = this.fb.group(
       {
         password: [''],
-        fullName: ['', Validators.required, Validators.minLength(5)],
+        fullName: ['', Validators.minLength(5)],
         userName: ['', [lowerCaseValidator], [this.usuarioExistenteService.usuarioJaExiste()]],
-        email: ['', Validators.required, Validators.email],
+        email: ['', Validators.email],
       },
       {
         validators: [usuarioSenhaIguaisValidator],
@@ -39,11 +41,8 @@ export class NovoUsuarioComponent implements OnInit {
     const novoUsuario = this.novoUsuarioForm.getRawValue();
     if (this.novoUsuarioForm.valid) {
       this.cadastro.cadastrarNovoUsuario(novoUsuario).subscribe(
-        (value: NovoUsuario) => {
-          (res: HttpResponse<NovoUsuario>) => {
-            console.log(res);
-            console.log(value);
-          };
+        () => {
+          this.router.navigate(['']);
         },
         (err: HttpErrorResponse) => {
           console.log(err);
