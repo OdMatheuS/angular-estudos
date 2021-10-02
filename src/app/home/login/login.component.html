@@ -1,13 +1,30 @@
 <h4 class="text-center">Login</h4>
-<form class="form mt-4" (ngSubmit)="efetuarLogin()">
-
-  <div class="form-group" style="margin: 10px 0px 10px 0px;">
-    <input type="text" [(ngModel)]="nome" name="nome" class="form-control" placeholder="Nome do Usuario"/>
+<form class="form mt-4" (ngSubmit)="efetuarLogin()" #loginForm="ngForm">
+  <div class="form-group" style="margin: 10px 0px 10px 0px">
+    <input
+      type="text"
+      [(ngModel)]="nome"
+      #campoUsuario="ngModel"
+      name="nome"
+      class="form-control"
+      placeholder="Nome do Usuario"
+      required
+    />
+    <app-mensagem *ngIf="campoUsuario.invalid && campoUsuario.touched" mensagem="Usuário obrigatório"></app-mensagem>
   </div>
 
-  <div class="form-group" style="margin: 10px 0px 10px 0px;">
-    <input type="password" [(ngModel)]="senha" name="senha" class="form-control" placeholder="Senha"/>
+  <div class="form-group" style="margin: 10px 0px 10px 0px">
+    <input
+      type="password"
+      [(ngModel)]="senha"
+      #campoSenha="ngModel"
+      name="senha"
+      class="form-control"
+      placeholder="Senha"
+      required
+    />
+    <app-mensagem *ngIf="campoSenha.invalid && campoSenha.touched" mensagem="Senha obrigatória"></app-mensagem>
   </div>
 
-  <button type="submit" class="btn btn-primary btn-block">Login</button>
+  <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary btn-block">Login</button>
 </form>
