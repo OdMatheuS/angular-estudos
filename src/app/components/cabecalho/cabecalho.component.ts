@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { UsuarioService } from 'src/app/auth/usuario/usuario.service';
 
 @Component({
   selector: 'app-cabecalho',
   templateUrl: './cabecalho.component.html',
-  styleUrls: ['./cabecalho.component.css']
+  styleUrls: ['./cabecalho.component.css'],
 })
-export class CabecalhoComponent implements OnInit {
+export class CabecalhoComponent {
+  public user$ = this.usuarioService.retornaUsuario();
 
-  constructor() { }
+  constructor(private usuarioService: UsuarioService, private router: Router) {}
 
-  ngOnInit(): void {
+  logout(): void {
+    this.usuarioService.logout();
+    this.router.navigate(['']);
   }
-
 }
