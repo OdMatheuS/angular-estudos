@@ -6,7 +6,7 @@ import { UsuarioService } from '../usuario/usuario.service';
 @Injectable({
   providedIn: 'root',
 })
-export class RouteGuardGuard implements CanLoad {
+export class RouteGuardAnimais implements CanLoad {
   constructor(private router: Router, private usuarioService: UsuarioService) {}
 
   canLoad(
