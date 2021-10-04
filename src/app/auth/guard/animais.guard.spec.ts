@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AnimaisGuard } from './route-guard.guard';
+import { AnimaisGuard } from './animais.guard';
 
 describe('AnimaisGuard', () => {
   let guard: AnimaisGuard;
