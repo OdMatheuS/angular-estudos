@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RouteGuardGuard } from './auth/guard/route-guard.guard';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
   {
     path: 'animais',
     loadChildren: () => import('./animais/animais.module').then((m) => m.AnimaisModule),
+    canLoad: [RouteGuardGuard],
   },
 ];
 
