@@ -1,19 +1,32 @@
 <header class="stick-top">
   <nav class="navbar navbar-light bg-white">
-    <a class="navbar-brand">Gatito Book</a>
+    <a class="navbar-brand">
+      <i 
+        (click)="menu.abreMenu()" 
+        (keyup.space)="menu.abreMenu()" 
+        class="fa fa-bars mr-2">
+      </i>
+      Gatito Book
+    </a>
+    <app-menu #menu>
+      <ul class="list-unstyled">
+        <li>
+          <a [routerLink]="['animais', 'novo']">Novo Animal </a>
+        </li>
+      </ul>
+    </app-menu>
     <div *ngIf="user$ | async as data">
       <div *ngIf="data.name; else login">
-        <i class="fa fa-user-circle mr-1 "></i>
-        <a style="margin: 0px 8px 0px 5px;" >{{data.name}}</a>
-        <a class="mr-1"(click)="logout()">Logout</a>
+        <i class="fa fa-user-circle mr-1"></i>
+        <a style="margin: 0px 8px 0px 5px">{{ data.name }}</a>
+        <a class="mr-1" (click)="logout()">Logout</a>
       </div>
     </div>
   </nav>
 
   <ng-template #login>
     <span class="navbar-text">
-      <a [routerLink]="['']" >Login</a>
+      <a [routerLink]="['']">Login</a>
     </span>
   </ng-template>
-
 </header>
