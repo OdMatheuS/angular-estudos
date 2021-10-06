@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
+  public mostraMenu = false
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+  
+  abreMenu(){
+    this.mostraMenu = !this.mostraMenu
   }
 
 }
