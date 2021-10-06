@@ -11,7 +11,7 @@ import { ComentariosService } from './comentarios.service';
   styleUrls: ['./comentarios.component.css'],
 })
 export class ComentariosComponent implements OnInit {
-  @Input() comentarioId!: number;
+  @Input() id!: number;
 
   public comentarios$!: Observable<Comentarios>;
 
@@ -20,7 +20,7 @@ export class ComentariosComponent implements OnInit {
   constructor(private comentarioService: ComentariosService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.comentarios$ = this.comentarioService.buscarComentarios(this.comentarioId);
+    this.comentarios$ = this.comentarioService.buscarComentarios(this.id);
     this.comentarioForm = this.fb.group({
       comentario: ['', Validators.maxLength(300)],
     });
@@ -28,14 +28,12 @@ export class ComentariosComponent implements OnInit {
 
   gravar(): void {
     const comentario = this.comentarioForm.get('comentario')?.value ?? '';
-    this.comentarios$ = this.comentarioService
-      .incluirComentario(this.comentarioId, comentario)
-      .pipe(
-        switchMap(() => this.comentarioService.buscarComentarios(this.comentarioId)),
-        tap(() => {
-          this.comentarioForm.reset();
-          alert('Comentario Salvo');
-        })
-      );
+    this.comentarios$ = this.comentarioService.incluirComentario(this.id, comentario).pipe(
+      switchMap(() => this.comentarioService.buscarComentarios(this.id)),
+      tap(() => {
+        this.comentarioForm.reset();
+        alert('Comentario Salvo');
+      })
+    );
   }
 }
