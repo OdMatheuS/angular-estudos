@@ -8,8 +8,7 @@ import { GradeFotosAnimaisComponent } from './grade-fotos-animais/grade-fotos-an
 import { CartaoModule } from '../components/cartao/cartao.module';
 import { DetalheAnimalComponent } from './detalhe-animal/detalhe-animal.component';
 import { ComentariosComponent } from './detalhe-animal/comentarios/comentarios.component';
-import { MensagemModule } from '../components/mensagem/mensagem.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +18,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     DetalheAnimalComponent,
     ComentariosComponent,
   ],
-  imports: [CommonModule, AnimaisRoutingModule, CartaoModule, MensagemModule, ReactiveFormsModule],
+  imports: [CommonModule, AnimaisRoutingModule, CartaoModule, SharedModule],
 })
 export class AnimaisModule {}
