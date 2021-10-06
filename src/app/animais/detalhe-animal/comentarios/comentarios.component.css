@@ -1,0 +1,10 @@
+.space-textarea {
+  height: 50vh;
+  overflow-y: auto;
+}
+
+.comment-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
