@@ -41,10 +41,9 @@ export class AnimaisService {
     formData.append('description', descricao);
     formData.append('allowComments', permiteComentario ? 'true' : 'false');
     formData.append('imageFile', arquivo);
-    return this.http.post(
-      `${environment.apiUrl}/photos/upload`,
-      { formData },
-      { observe: 'events', reportProgress: true }
-    );
+    return this.http.post(`${environment.apiUrl}/photos/upload`, formData, {
+      observe: 'events',
+      reportProgress: true,
+    });
   }
 }
