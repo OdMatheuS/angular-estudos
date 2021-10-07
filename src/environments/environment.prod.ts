@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: window.location.protocol + '//localhost:3000',
 };

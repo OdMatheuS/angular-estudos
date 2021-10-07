@@ -1,0 +1,19 @@
+<div class="bg-white border" *ngIf="animal$ | async as data">
+  <div class="row">
+    <div class="col-lg-8">
+      <app-animal [url]="data.url" [descricao]="data.description"></app-animal>
+    </div>
+    <div class="col-lg-4">
+      <small>
+        <p class="text-left break-word">{{ data.description }}</p>
+        <i (click)="curtir()" class="fa fa-heart-o fa-2x mr-2 pull-left">{{data.likes}}</i>
+        <i class="fa fa-comment-o fa-2x mr-2 ml-2">{{data.comments}}</i>
+        <i (click)="excluir()" class="fa fa-trash-o fa-2x pull-right"></i>
+      </small>
+      <app-comentarios [id]="animalId" *ngIf="data.allowComments; else warning"></app-comentarios>
+      <ng-template #warning>
+        <p>Não pode comentar esta foto</p>
+      </ng-template>
+    </div>
+  </div>
+</div>
