@@ -11,7 +11,7 @@ export class NovoAnimalComponent implements OnInit {
   public formularioAnimal!:FormGroup
   public file!:File
   public preview!:string
-  public percentualProgresso = 0
+  public percentualConcluido = 0
 
   constructor(private animaisService:AnimaisService,private fb:FormBuilder) { }
 
